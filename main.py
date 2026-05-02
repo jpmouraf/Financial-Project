@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import random
+import yfinance as yf
 
 # ── Dados falsos (substituir por Yahoo Finance depois) ──────────────────────
 
@@ -146,6 +147,18 @@ c.pack(side="left", fill="both", expand=True, padx=8, pady=8)
 c.bind("<Configure>", lambda e: desenhar())
 c.bind("<Button-1>", on_click)
 c.bind("<B1-Motion>", on_drag)
+
+#TODO: pequeno teste
+ticker = yf.Ticker("VALE3.SA")
+# Anual
+cashflow_anual = ticker.cashflow
+
+# Trimestral
+cashflow_trimestral = ticker.quarterly_cashflow
+
+print(cashflow_anual)
+print(cashflow_trimestral)
+print(ticker.quarterly_financials)  # anual
 
 # Carrega ao iniciar
 carregar()
