@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}CAD 167 — UFMG{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <nav class="topnav">
+    <span class="nav-brand">CAD 167 · UFMG</span>
+    <a href="/t1" class="nav-link {% if request.path == '/t1' %}active{% endif %}">Análise Fundamentalista</a>
+    <a href="/t2" class="nav-link {% if request.path == '/t2' %}active{% endif %}">Fronteira Eficiente</a>
+    <a href="/playground" class="nav-link {% if request.path == '/playground' %}active{% endif %}">Playground</a>
+  </nav>
+  <div class="layout">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

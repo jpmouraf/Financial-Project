@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Análise Fundamentalista — CAD 167{% endblock %}
+
+{% block content %}
+<aside class="sidebar">
+  <section class="sb-section">
+    <label class="sb-label">EMPRESA</label>
+    <div class="autocomplete-wrap">
+      <input id="ticker-input" class="sb-input" type="text" value="VALE3"
+             placeholder="Ex.: VALE3" autocomplete="off" list="ticker-list">
+      <datalist id="ticker-list"></datalist>
+    </div>
+  </section>
+
+  <section class="sb-section">
+    <label class="sb-label">INDICADORES</label>
+    <div class="indicator-group">
+      {% for ind in indicadores %}
+        {% if ind == 'LPA' %}<hr class="ind-sep">{% endif %}
+        <label class="cb-row">
+          <input type="checkbox" name="indicator" value="{{ ind }}"
+                 {% if ind == 'Preço da Cota' %}checked{% endif %}>
+          <span class="cb-dot" style="background:{{ cores[ind] }}"></span>
+          {{ ind }}
+        </label>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="sb-section">
+    <label class="sb-label">PERÍODO HISTÓRICO</label>
+    <div class="radio-row">
+      {% for p in hist_periods %}
+        <label class="radio-btn">
+          <input type="radio" name="hist_period" value="{{ p }}"
+                 {% if p == '5A' %}checked{% endif %}>
+          {{ p }}
+        </label>
+      {% endfor %}
+    </div>
+    <div class="radio-row" style="margin-top:6px">
+      <label class="radio-btn">
+        <input type="radio" name="periodo" value="Trimestral" checked> Trimestral
+      </label>
+      <label class="radio-btn">
+        <input type="radio" name="periodo" value="Anual"> Anual
+      </label>
+    </div>
+  </section>
+
+  <button id="btn-carregar" class="btn-primary">▶ Carregar</button>
+  <button id="btn-resetar" class="btn-secondary">↺ Resetar</button>
+  <div id="status" class="status-msg"></div>
+</aside>
+
+<main class="main-content">
+  <div id="chart" class="chart-area"></div>
+</main>
+
+<script src="{{ url_for('static', filename='t1.js') }}"></script>
+{% endblock %}
